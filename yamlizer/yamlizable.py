@@ -3,6 +3,7 @@
 import yaml
 
 from . import yamlmapper
+from .yamlizer import YamlizationError
 
 
 class YamlizableMetaclass(type):
@@ -11,12 +12,9 @@ class YamlizableMetaclass(type):
     def __init__(cls, name, bases, kwds) -> None:
         """ """
         super().__init__(name, bases, kwds)
-
         cls._yaml_tag = name
-
         cls._yaml_dumper = yaml.SafeDumper
         cls._yaml_dumper.add_representer(cls, cls._to_yaml)
-
         cls._yaml_loader = yaml.SafeLoader
         cls._yaml_loader.add_constructor(cls._yaml_tag, cls._from_yaml)
 
@@ -38,10 +36,7 @@ class Yamlizable(metaclass=YamlizableMetaclass):
     def _to_yaml(cls, dumper: yaml.Dumper, yamlizable) -> yaml.MappingNode:
         """ """
         yaml_map = yamlmapper.yaml_map(yamlizable)
-        try:
-            return dumper.represent_mapping(yamlizable._yaml_tag, yaml_map)
-        except yaml.YAMLError:
-            raise
+        return dumper.represent_mapping(yamlizable._yaml_tag, yaml_map)
 
     @classmethod
     def _from_yaml(cls, loader: yaml.Loader, node: yaml.MappingNode):
@@ -49,7 +44,5 @@ class Yamlizable(metaclass=YamlizableMetaclass):
         try:
             kwargs = loader.construct_mapping(node, deep=True)
             return cls(**kwargs)
-        except yaml.YAMLError:
-            raise
         except TypeError:
-            raise
+            raise YamlizationError(f"Yaml map incompatible with {cls} init()") from None

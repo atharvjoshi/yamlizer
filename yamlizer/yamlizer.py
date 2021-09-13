@@ -30,7 +30,7 @@ _REGISTRAR = YamlRegistrar()
 def register(cls: Type[Any]) -> None:
     """ """
     if not inspect.isclass(cls):
-        raise YamlRegistrationError("Only a Python class can be registered")
+        raise YamlRegistrationError("Only Python class(es) can be registered")
     yaml_tag = cls.__name__
     yaml.SafeDumper.add_representer(cls, _represent)
     yaml.SafeLoader.add_constructor(yaml_tag, _construct)
@@ -51,7 +51,7 @@ def _construct(loader: yaml.Loader, node: yaml.MappingNode) -> Any:
     try:
         return cls(**kwargs)
     except TypeError:
-        raise YamlizationError(f"Yaml map incompatible with {cls} __init__()") from None
+        raise YamlizationError(f"Yaml map incompatible with {cls} init()") from None
 
 
 def dump(config: Any, configpath: Path, mode: str = "w+") -> None:
