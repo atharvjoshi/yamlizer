@@ -12,6 +12,11 @@ from . import yamlmapper
 class YamlRegistrationError(Exception):
     """ """
 
+
+class YamlizationError(Exception):
+    """ """
+
+
 class YamlRegistrar:
     """ """
 
@@ -36,42 +41,26 @@ def _represent(dumper: yaml.Dumper, yamlizable: Any) -> yaml.MappingNode:
     """ """
     yaml_tag = yamlizable.__class__.__name__
     yaml_map = yamlmapper.yaml_map(yamlizable)
-    try:
-        return dumper.represent_mapping(yaml_tag, yaml_map)
-    except yaml.YAMLError:
-        raise
+    return dumper.represent_mapping(yaml_tag, yaml_map)
 
 
 def _construct(loader: yaml.Loader, node: yaml.MappingNode) -> Any:
     """ """
+    kwargs = loader.construct_mapping(node, deep=True)
+    cls = _REGISTRAR.register[node.tag]
     try:
-        kwargs = loader.construct_mapping(node, deep=True)
-    except yaml.YAMLError:
-        pass
-    except TypeError:
-        pass
-    else:
-        cls = _REGISTRAR.register[node.tag]
         return cls(**kwargs)
+    except TypeError:
+        raise YamlizationError(f"Yaml map incompatible with {cls} __init__()") from None
 
 
 def dump(config: Any, configpath: Path, mode: str = "w+") -> None:
     """ """
-    try:
-        with open(configpath, mode=mode) as configfile:
-            yaml.safe_dump(config, configfile)
-    except IOError:
-        raise
-    except yaml.YAMLError:
-        raise
+    with open(configpath, mode=mode) as configfile:
+        yaml.safe_dump(config, configfile)
 
 
 def load(configpath: Path) -> Any:
     """ """
-    try:
-        with open(configpath, mode="r") as configfile:
-            return yaml.safe_load(configfile)
-    except yaml.YAMLError:
-        raise
-    except IOError:
-        raise
+    with open(configpath, mode="r") as configfile:
+        return yaml.safe_load(configfile)
