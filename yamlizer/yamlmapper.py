@@ -7,11 +7,6 @@ from typing import Any
 class YamlMappingError(Exception):
     """ """
 
-    def __init__(self, yamlizable: Any, key: str) -> None:
-        """ """
-        message = f"'{key}' must be an attribute of '{yamlizable}'"
-        super().__init__(message)
-
 
 def yaml_map(yamlizable: Any) -> dict[str, Any]:
     """ """
@@ -34,7 +29,7 @@ def yaml_map(yamlizable: Any) -> dict[str, Any]:
     yaml_map = dict()
     for key in yaml_map_keys:
         if not hasattr(yamlizable, key):
-            raise YamlMappingError(yamlizable, key)
+            raise YamlMappingError(f"'{key}' must be an attribute of '{yamlizable}'")
         else:
             value = getattr(yamlizable, key)
             yaml_map[key] = value
