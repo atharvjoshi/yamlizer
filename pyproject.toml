@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "yamlizer"
+version = "0.1.0"
+description = "Plug-and-play boilerplate for initializing and saving custom Python objects from and to yaml configuration files safely"
+authors = ["Atharv Joshi <atharvjoshi@ymail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PyYAML = "^5.4.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^21.8b0"
+Sphinx = "^4.1.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
