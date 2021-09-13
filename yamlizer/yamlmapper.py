@@ -3,7 +3,15 @@
 import inspect
 from typing import Any
 
-from .exceptions import YamlMappingError 
+
+class YamlMappingError(Exception):
+    """ """
+
+    def __init__(self, yamlizable: Any, key: str) -> None:
+        """ """
+        message = f"'{key}' must be an attribute of '{yamlizable}'"
+        super().__init__(message)
+
 
 def yaml_map(yamlizable: Any) -> dict[str, Any]:
     """ """
