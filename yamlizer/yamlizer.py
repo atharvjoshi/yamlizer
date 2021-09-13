@@ -1,5 +1,6 @@
 """ """
 
+import inspect
 from pathlib import Path
 from typing import Any, Type
 
@@ -7,6 +8,9 @@ import yaml
 
 from . import yamlmapper
 
+
+class YamlRegistrationError(Exception):
+    """ """
 
 class YamlRegistrar:
     """ """
@@ -20,14 +24,12 @@ _REGISTRAR = YamlRegistrar()
 
 def register(cls: Type[Any]) -> None:
     """ """
-    try:
-        yaml_tag = cls.__name__
-    except AttributeError:
-        pass
-    else:
-        yaml.SafeDumper.add_representer(cls, _represent)
-        yaml.SafeLoader.add_constructor(yaml_tag, _construct)
-        _REGISTRAR.register[yaml_tag] = cls
+    if not inspect.isclass(cls):
+        raise YamlRegistrationError("Only a Python class can be registered")
+    yaml_tag = cls.__name__
+    yaml.SafeDumper.add_representer(cls, _represent)
+    yaml.SafeLoader.add_constructor(yaml_tag, _construct)
+    _REGISTRAR.register[yaml_tag] = cls
 
 
 def _represent(dumper: yaml.Dumper, yamlizable: Any) -> yaml.MappingNode:
