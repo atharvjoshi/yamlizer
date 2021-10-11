@@ -19,6 +19,11 @@ class Data(Yamlizable):
         """ """
         self.data = data
 
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.data == other.data
+        return False
+
 
 class DataChild(Data):
     """ """
@@ -50,13 +55,13 @@ class Info:
 
 
 @pytest.fixture
-def get_data() -> Data:
+def data() -> Data:
     """ """
     return Data()
 
 
 @pytest.fixture
-def get_data_yaml_map() -> dict:
+def data_yaml_map() -> dict:
     """ """
     return {
         "data": {
@@ -68,36 +73,53 @@ def get_data_yaml_map() -> dict:
 
 
 @pytest.fixture
-def get_datachild() -> DataChild:
+def datachild() -> DataChild:
     """ """
     return DataChild()
 
 
 @pytest.fixture
-def get_datachild_yaml_map() -> dict:
+def datachild_yaml_map() -> dict:
     """ """
-    return get_data_yaml_map().update({"level": 1})
+    return {
+        "data": {
+            "list": [0, 1.0, 2e2, 1 + 2j],
+            "set": {None, True},
+            "tuple": (b"a", "f"),
+        },
+        "level": 1,
+    }
 
 
 @pytest.fixture
-def get_datagrandchild() -> DataGrandChild:
+def datagrandchild() -> DataGrandChild:
     """ """
     return DataGrandChild()
 
 
 @pytest.fixture
-def get_datagrandchild_yaml_map() -> dict:
+def datagrandchild_yaml_map() -> dict:
     """ """
-    return get_datachild_yaml_map().update({"name": "X"})
+    return {
+        "data": {
+            "list": [0, 1.0, 2e2, 1 + 2j],
+            "set": {None, True},
+            "tuple": (b"a", "f"),
+        },
+        "level": 1,
+        "name": "X",
+    }
 
 
 @pytest.fixture
-def get_info() -> Info:
+def info() -> Info:
     """ """
     return Info()
 
 
 @pytest.fixture
-def get_info_yaml_map() -> Info:
+def info_yaml_map() -> Info:
     """ """
-    return {"info": get_data_yaml_map()}
+    return {
+        "info": Data(),
+    }
