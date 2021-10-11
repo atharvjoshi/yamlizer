@@ -17,14 +17,14 @@ class YamlizationError(Exception):
     """ """
 
 
-class YamlRegistrar:
+class _YamlRegistrar:
     """ """
 
     def __init__(self) -> None:
         self.register: dict[str, Type] = dict()
 
 
-_REGISTRAR = YamlRegistrar()
+_REGISTRAR = _YamlRegistrar()
 
 
 def register(cls: Type[Any]) -> None:
