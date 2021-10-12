@@ -1,0 +1,20 @@
+- !<Data>
+  data: &id001
+    list:
+    - 0
+    - 1.0
+    - 200.0
+    - 1
+    - !!binary |
+      YQ==
+    - f
+    set: !!set
+      true: null
+      null: null
+- !<DataChild>
+  data: *id001
+  level: 1
+- !<DataGrandChild>
+  data: *id001
+  level: 1
+  name: X

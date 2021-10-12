@@ -12,8 +12,7 @@ class Data(Yamlizable):
         self,
         data: dict = {
             "set": {None, True},
-            "tuple": (b"a", "f"),
-            "list": [0, 1.0, 2e2, 1 + 2j],
+            "list": [0, 1.0, 2e2, 1, b"a", "f"],
         },
     ) -> None:
         """ """
@@ -65,9 +64,8 @@ def data_yaml_map() -> dict:
     """ """
     return {
         "data": {
-            "list": [0, 1.0, 2e2, 1 + 2j],
+            "list": [0, 1.0, 2e2, 1, b"a", "f"],
             "set": {None, True},
-            "tuple": (b"a", "f"),
         }
     }
 
@@ -83,9 +81,8 @@ def datachild_yaml_map() -> dict:
     """ """
     return {
         "data": {
-            "list": [0, 1.0, 2e2, 1 + 2j],
+            "list": [0, 1.0, 2e2, 1, b"a", "f"],
             "set": {None, True},
-            "tuple": (b"a", "f"),
         },
         "level": 1,
     }
@@ -102,9 +99,8 @@ def datagrandchild_yaml_map() -> dict:
     """ """
     return {
         "data": {
-            "list": [0, 1.0, 2e2, 1 + 2j],
+            "list": [0, 1.0, 2e2, 1, b"a", "f"],
             "set": {None, True},
-            "tuple": (b"a", "f"),
         },
         "level": 1,
         "name": "X",
