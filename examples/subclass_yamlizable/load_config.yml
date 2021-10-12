@@ -1,0 +1,16 @@
+!<Student>
+  age: 12
+  institution: TSS
+  name: J
+  parents:
+  - !<Employee>
+    age: 32
+    name: I
+    salary: 3000
+    wealth: $300,000.00
+  - !<Employee>
+    age: 32
+    name: W
+    salary: 3000
+    wealth: $400,000.00
+  wealth: $100,000.00

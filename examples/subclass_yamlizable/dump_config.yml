@@ -1,0 +1,35 @@
+- &id001 !<Employee>
+  age: 35
+  name: O
+  salary: 2500.5
+  wealth: $400,000.00
+- &id002 !<Employee>
+  age: 40
+  name: T
+  salary: 5001
+  wealth: $200,000.00
+- !<Graduate>
+  age: 20
+  institution: IUS
+  major: law
+  name: H
+  parents:
+  - *id001
+  - *id002
+  wealth: $30,000.00
+- !<Student>
+  age: 13
+  institution: TSS
+  name: J
+  parents:
+  - !<Employee>
+    age: 32
+    name: I
+    salary: 3000
+    wealth: $300,000.00
+  - !<Employee>
+    age: 32
+    name: W
+    salary: 3000
+    wealth: $400,000.00
+  wealth: $100,000.00
