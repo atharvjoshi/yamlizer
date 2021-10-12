@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yamlizer"
-version = "0.1.0"
+version = "1.0"
 description = "Plug-and-play boilerplate for initializing and saving custom Python objects from and to yaml configuration files safely"
 authors = ["Atharv Joshi <atharvjoshi@ymail.com>"]
 
