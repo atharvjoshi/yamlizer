@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "yamlizer"
 version = "1.0"
-description = "Plug-and-play boilerplate for initializing and saving custom Python objects from and to yaml configuration files safely"
+description = "Yamlizer simplifies loading (dumping) of custom Python objects from (to) yaml configuration files"
 authors = ["Atharv Joshi <atharvjoshi@ymail.com>"]
 
 [tool.poetry.dependencies]
