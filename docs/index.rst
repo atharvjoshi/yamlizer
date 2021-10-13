@@ -1,10 +1,10 @@
 .. yamlizer documentation master file, created by
-   sphinx-quickstart on Tue Oct 12 23:32:28 2021.
+   sphinx-quickstart on Wed Oct 13 09:27:56 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to yamlizer's documentation!
-====================================
+Yamlizer: initialize custom objects from yaml files
+=====================================================
 
 .. toctree::
    :maxdepth: 2
