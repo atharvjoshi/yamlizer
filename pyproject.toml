@@ -12,6 +12,7 @@ PyYAML = "^5.4.1"
 pytest = "^5.2"
 black = "^21.8b0"
 Sphinx = "^4.1.2"
+sphinxcontrib-napoleon = "^0.7"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
