@@ -13,6 +13,8 @@ pytest = "^5.2"
 black = "^21.8b0"
 Sphinx = "^4.1.2"
 sphinxcontrib-napoleon = "^0.7"
+sphinx-rtd-theme = "^1.0.0"
+pylint = "^2.11.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
