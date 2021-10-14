@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ """
 
 import inspect
@@ -21,7 +22,7 @@ class _YamlRegistrar:
     """ """
 
     def __init__(self) -> None:
-        self.register: dict[str, Type] = dict()
+        self.register: dict[str, Type] = {}
 
 
 _REGISTRAR = _YamlRegistrar()
