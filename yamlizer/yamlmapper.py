@@ -16,7 +16,7 @@ class YamlMappingError(Exception):
 
 
 def yaml_map(yamlizable: Any) -> dict[str, Any]:
-    """Generates the yaml map of the given yamlizable.
+    """Generates the yaml map of the given yamlizable
 
     Args:
         yamlizable (Any): instance to be yaml mapped
@@ -26,9 +26,8 @@ def yaml_map(yamlizable: Any) -> dict[str, Any]:
         __init__() is not its attribute
 
     Returns:
-        dict[str, Any]: a map of the names of keyword arguments in the yamlizable's 
-        __init__() method and the values of the yamlizable's attributes with that name.
-        """
+        dict[str, Any]: map of the names of keyword arguments in yamlizable's __init__()
+        method and the values of yamlizable's attributes with that name"""
     # traverse the yamlizable's MRO to find names of arguments passed to __init__()
     mro = inspect.getmro(type(yamlizable))
     yaml_map_keys = set()
@@ -48,11 +47,11 @@ def yaml_map(yamlizable: Any) -> dict[str, Any]:
         if not found_kwargs:
             break
 
-    yaml_map = dict()
+    _yaml_map = {}
     for key in yaml_map_keys:
         if not hasattr(yamlizable, key):
             raise YamlMappingError(f"'{key}' must be an attribute of '{yamlizable}'")
         else:
             value = getattr(yamlizable, key)
-            yaml_map[key] = value
-    return yaml_map
+            _yaml_map[key] = value
+    return _yaml_map
