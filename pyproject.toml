@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yamlizer"
-version = "1.0"
+version = "1.0.0"
 description = "Yamlizer simplifies loading (dumping) of custom Python objects from (to) yaml configuration files"
 authors = ["Atharv Joshi <atharvjoshi@ymail.com>"]
 
