@@ -1,33 +1,34 @@
 # -*- coding: utf-8 -*-
-"""This module contains utilities to generate yaml maps. The yaml map is a dictionary
-that maps the names of keyword arguments required to initialize a custom object
-("Yamlizable") to the values of the yamlizable's attributes with the same name. Yaml
-maps are stored in a yaml configuration file under the yamlizable's custom yaml tag.
-Yamlizer reads yaml maps from configuration files and instantiates objects with a
-`Yamlizable(**yaml_map)` call."""
+"""This module contains utilities to generate yaml maps.
+
+The yaml map is a dictionary that maps the names of keyword arguments required to
+initialize a custom object ("Yamlizable") to the values of the yamlizable's attributes
+with the same name. Yaml maps are stored in a yaml configuration file under the
+yamlizable's custom yaml tag. Yamlizer reads yaml maps from configuration files and
+instantiates objects with a `Yamlizable(**yaml_map)` call."""
 
 import inspect
 from typing import Any
 
 
 class YamlMappingError(Exception):
-    """Raised when the name of a keyword argument passed to an object's `__init__()` is
-    not an attribute of its instance"""
+    """Raised if the name of a keyword argument passed to an object's `__init__()` is
+    not an attribute of its instance."""
 
 
 def yaml_map(yamlizable: Any) -> dict[str, Any]:
-    """Generates the yaml map of the given yamlizable
+    """Generates the yaml map of the given yamlizable.
 
     Args:
-        yamlizable (Any): instance to be yaml mapped
+        yamlizable (Any): instance to be yaml mapped.
 
     Raises:
         YamlMappingError: if the name of a keyword argument in the yamlizable's
-        __init__() is not its attribute
+        __init__() is not its attribute.
 
     Returns:
         dict[str, Any]: map of the names of keyword arguments in yamlizable's __init__()
-        method and the values of yamlizable's attributes with that name"""
+        method and the values of yamlizable's attributes with that name."""
     # traverse the yamlizable's MRO to find names of arguments passed to __init__()
     mro = inspect.getmro(type(yamlizable))
     yaml_map_keys = set()
