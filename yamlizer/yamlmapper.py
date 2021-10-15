@@ -48,11 +48,11 @@ def yaml_map(yamlizable: Any) -> dict[str, Any]:
         if not found_kwargs:
             break
 
-    _yaml_map = {}
+    yaml_map_ = {}
     for key in yaml_map_keys:
         if not hasattr(yamlizable, key):
             raise YamlMappingError(f"'{key}' must be an attribute of '{yamlizable}'")
         else:
             value = getattr(yamlizable, key)
-            _yaml_map[key] = value
-    return _yaml_map
+            yaml_map_[key] = value
+    return yaml_map_
